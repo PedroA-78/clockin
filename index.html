@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClockIn</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="app">
+    <header class="header"></header>
+    <main class="main">
+        <section class="registers">
+            <div class="registers_heading">
+                <h2 class="registers_title">Registros de Hoje</h2>
+                <p class="registers_text">Acompanhe seus horários de entrada e saída</p>
+            </div>
+            <div class="markers">
+                <div class="marker">
+                    <span class="material-symbols-outlined marker_icon">arrow_downward</span>
+                    <p class="marker_text">Entrada</p>
+                    <p class="marker_hour">--:--</p>
+                </div>
+                <div class="marker">
+                    <span class="material-symbols-outlined marker_icon">fork_spoon</span>
+                    <p class="marker_text">Saída para Intervalo</p>
+                    <p class="marker_hour">--:--</p>
+                </div>
+                <div class="marker">
+                    <span class="material-symbols-outlined marker_icon">fork_spoon</span>
+                    <p class="marker_text">Volta do Intervalo</p>
+                    <p class="marker_hour">--:--</p>
+                </div>
+                <div class="marker">
+                    <span class="material-symbols-outlined marker_icon">arrow_upward</span>
+                    <p class="marker_text">Saída</p>
+                    <p class="marker_hour">--:--</p>
+                </div>
+                <!-- <div class="marker worked">
+                    <p class="marker_text">Total de Horas Trabalhadas</p>
+                    <p class="marker_hour">--:--</p>
+                </div> -->
+            </div>
+        </section>
+        <div class="menu">
+            <button type="button" class="menu_item active">
+                <span class="material-symbols-outlined menu_item_icon ">home</span>
+                Início
+            </button>
+            <button type="button" class="menu_item">
+                <span class="material-symbols-outlined menu_item_icon">calendar_today</span>
+                Calendário
+            </button>
+        </div>
+        <div class="mark">
+            <span class="material-symbols-outlined mark_icon">add</span>
+            <p class="mark_text">Bater o ponto</p>
+        </div>
+    </main>
+    
+    <div class="modals">
+        <div class="modal" id="clockIn">
+            <div class="modal_overlay"></div>
+            <div class="modal_content">
+                <div class="modal_heading">
+                    <h3 class="modal_heading_title">Registar Ponto</h3>
+                    <p class="modal_heading_text">Próximo registro: <span class="modal_heading_subtext">Entrada</span></p>
+                </div>
+                <form class="modal_form">
+                    <label class="form_title">Horário do Registro</label>
+                    
+                    <div class="form_container">
+                        <button type="button" class="form_button input_minus"><span class="material-symbols-outlined">remove</span></button>
+                        <input type="number" class="form_input time_hours">
+                        <input type="number" class="form_input time_minutes">
+                        <button type="button" class="form_button input_more"><span class="material-symbols-outlined">add</span></button>
+                    </div>
+
+                    <!-- <div class="form_announce"></div> -->
+
+                    <button type="button" class="form_submit">
+                        <span class="material-symbols-outlined form_submit_icon">arrow_downward</span>
+                        <p class="form_submit_text">Entrada</p>
+                        <p class="form_submit_subtext">Iniciar expediente</p>
+                    </button>
+                </form>
+                <div class="modal_footering">
+                    <p class="modal_footering_text">sábado, 13 de setembro de 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
