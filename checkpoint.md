@@ -1,34 +1,44 @@
-✅ Checkpoint – 15/09/2025
+✅ Checkpoint – 16/09/2025
 
-Modal de registro já funcional.
+Checkpoint — Próximos passos no ClockIn
 
-Registros aparecem na tela inicial com hora formatada.
+Preparar base do calendário
 
-Persistência em localStorage funcionando direitinho.
+Criar um componente/section calendar na tela (HTML + CSS).
 
-Função updateMarkers(time) já atualiza visualmente os steps.
+Estruturar dias do mês em grid (7 colunas = dias da semana).
 
-📌 Próximos passos (para amanhã)
+Destacar o dia atual com um estilo especial.
 
-Pré-preencher modal com dados existentes
+Integração com registros
 
-Ao abrir o modal, verificar no localStorage se já existe registro para o step atual.
+Marcar visualmente os dias que já possuem registros no localStorage.
 
-Se existir → mostrar no input a hora salva e mudar visual do botão (ex: "Editar" em vez de "Registrar").
+Exemplo: bolinha azul embaixo do número do dia.
 
-Finalização automática do ciclo diário
+Interação básica
 
-Se todos os pontos do dia estiverem registrados:
+Ao clicar em um dia, exibir os registros daquele dia (mesmo layout da tela inicial).
 
-Desabilitar o botão principal de abrir modal.
+Se o dia não tiver registros → mostrar mensagem tipo "Nenhum ponto registrado neste dia".
 
-Exibir no botão algo como "Todos os pontos registrados".
+Refino visual
 
-Na tela inicial, em cada marcador, adicionar um <span>(registrado)</span> ou similar para indicar conclusão.
+Transição suave na troca de dias.
 
-Fluxo de checagem
+Ícones de navegação (← →) para trocar de mês (mesmo que só prepare a estrutura).
 
-Criar função para verificar no carregamento da página se o dia atual já tem dados → aplicar automaticamente os estados corretos (botão desabilitado, spans nos marcadores, etc.).
+Organização do JS
+
+Criar módulo calendar.js separado.
+
+Funções principais:
+
+renderCalendar(currentMonth) → desenha os dias.
+
+highlightMarkedDays() → verifica localStorage e marca.
+
+openDayDetails(day) → abre registros.
 
 🚀 Ideias futuras (não urgente)
 

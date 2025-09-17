@@ -1,5 +1,3 @@
-// const steps = ['clock_in', 'interval_start', 'interval_end', 'clock_out']
-
 const steps = [
     { 
         key: "clock_in",
@@ -27,42 +25,78 @@ const steps = [
     }
 ]
 
-let currentStep = 0; // começa no primeiro
+let currentStep = 0 // começa no primeiro
 let step = steps[currentStep]
 
-export function updateUI() {
+export function updateUI(lastStep) {
+    if (lastStep === 3) { disableSubmit(); return }
+
+    currentStep = lastStep || currentStep
     step = steps[currentStep]
 
-    const button = document.querySelector('.form_submit')
-    const icon = document.querySelector('.form_submit_icon')
-    const text = document.querySelector('.form_submit_text')
-    const subtext = document.querySelector('.form_submit_subtext')
+    updateSubmitButton({key: step.key, 
+                        label: step.label, 
+                        icon: step.icon, 
+                        subtext: step.subtext})
 
-    const nextRegister = document.querySelector('.modal_heading_subtext')
-
-    button.classList.toggle(step.key)
-    icon.textContent = step.icon
-    text.textContent = step.label
-    subtext.textContent = step.subtext
-
-    nextRegister.textContent = step.label
-
+    setDate()
 }
 
 export function nextStep() {
-    if (currentStep < steps.length -1) {
+    updateMarkers({ hours: document.querySelector('.time_hours').value,
+                    minutes: document.querySelector('.time_minutes').value})
+
+    if (currentStep < steps.length - 1) {
         document.querySelector('.form_submit').classList.toggle(step.key)
 
         currentStep++
         updateUI()
+        return
     }
+
+    disableSubmit()
 }
 
-export function updateMarkers(time) {
+function updateMarkers({hours, minutes}) {
     const markers = document.querySelectorAll('.marker')
     const marker = markers[currentStep]
 
     marker.classList.add('marked')
     marker.querySelector('.marker_icon').classList.add(step.key)
-    marker.querySelector('.marker_hour').textContent = `${time.hours}:${time.minutes}`
+    marker.querySelector('.marker_hour').textContent = `${hours}:${minutes}`
+    marker.querySelector('.marker_register').classList.add('visible')
 }
+
+function setDate() {
+    const today = new Date()
+    const formatted = today.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    })
+
+    document.querySelector('.modal_footering_text').textContent = formatted
+}
+
+function updateSubmitButton({key, label, icon, subtext}) {
+    const button = document.querySelector('.form_submit')
+    const iconElem = document.querySelector('.form_submit_icon')
+    const text = document.querySelector('.form_submit_text')
+    const subtextElem = document.querySelector('.form_submit_subtext')
+    const nextRegister = document.querySelector('.modal_heading_subtext')
+
+    button.className = `form_submit ${key}`
+    iconElem.textContent = icon
+    text.textContent = label
+    subtextElem.textContent = subtext
+    nextRegister.textContent = label
+}
+
+function disableSubmit() {
+    const button = document.querySelector('.form_submit');
+    button.disabled = true;
+
+    updateSubmitButton({key: 'done', label: 'Dia encerrado', icon: 'check_circle', subtext: 'Todos os registros feitos'});
+}
+

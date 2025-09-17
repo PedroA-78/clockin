@@ -62,22 +62,3 @@ export function normalizeTime(option) {
 
     renderTime()
 }
-
-export function setDay() {
-    const today = new Date()
-    const formatted = today.toLocaleDateString("pt-BR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    })
-
-    document.querySelector('.modal_footering_text').textContent = formatted
-}
-
-export function getInputTime() {
-    return {
-        hours: document.querySelector('.time_hours').value,
-        minutes: document.querySelector('.time_minutes').value
-    }
-}

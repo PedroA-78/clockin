@@ -1,7 +1,7 @@
 import { openModal, closeModal } from "./modal.js"
-import { openTime, addHour, subHour, addMinute, subMinute, setDay, getInputTime, normalizeTime } from "./timerPicker.js"
-import { updateUI, nextStep, updateMarkers } from "./updateUI.js"
-import { load, save } from "./storage.js"
+import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
+import { updateUI, nextStep } from "./updateUI.js"
+import { load, save, eraseDay, checkStep } from "./storage.js"
 
 // MODAL
 const mark = document.querySelector('.mark')
@@ -41,10 +41,14 @@ minutesInput.addEventListener('input', () => normalize())
 
 // INIT REGISTER MODAL
 const submit = document.querySelector('.form_submit')
-window.addEventListener('DOMContentLoaded', () => { updateUI(); setDay(); load() })
+window.addEventListener('DOMContentLoaded', () => { 
+    load()
+    updateUI(checkStep())
 
-submit.addEventListener('click', () => { 
-    updateMarkers(getInputTime())
+    if (0) eraseDay() // use this to erase the day data (for testing purposes)
+})
+
+submit.addEventListener('click', () => {
+    nextStep()
     save()
-    nextStep() 
 })
