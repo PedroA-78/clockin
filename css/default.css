@@ -30,7 +30,7 @@ html, body {
 }
 
 body {
-    height: 100dvh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
 }
@@ -77,4 +77,47 @@ body {
     margin: 0;
     font-size: .875rem;
     color: var(--text-color);
+}
+
+/* MENU */
+
+.menu {
+    width: 100%;
+    min-height: 5rem;
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid rgba(var(--foreground), .2);
+    background-color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.menu_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .8rem;
+    border: none;
+    border-radius: .75rem;
+    color: var(--text-color);
+    font-family: var(--font-text);
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    background: transparent;
+}
+
+.menu_item.active {
+    color: rgb(var(--blue));
+    background: rgba(var(--blue), .1);
+}
+
+.menu_item_icon {
+    font-size: 1.25rem !important;
 }
