@@ -1,5 +1,5 @@
 import { openModal } from "./modal.js"
-import { setupMenu } from "./section.js"
+import { setupMenu } from "./menu.js"
 import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"

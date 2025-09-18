@@ -10,13 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 </head>
 <body class="app">
-    <header class="header"></header>
+    <header class="header">
+        <div class="registers_heading active">
+            <span class="material-symbols-outlined registers_icon">punch_clock</span>
+            <h2 class="registers_title">Registros de Hoje</h2>
+            <p class="registers_text">Acompanhe seus horários de entrada e saída</p>
+        </div>
+        <div class="calendar_heading">
+            <span class="material-symbols-outlined calendar_icon">calendar_today</span>
+            <h2 class="calendar_title">Calendário</h2>
+            <p class="calendar_text">Revise seus registros anteriores</p>
+        </div>
+    </header>
     <main class="main">
         <section id="registers" class="registers active">
-            <div class="registers_heading">
-                <h2 class="registers_title">Registros de Hoje</h2>
-                <p class="registers_text">Acompanhe seus horários de entrada e saída</p>
-            </div>
             <div class="markers">
                 <div class="marker">
                     <span class="material-symbols-outlined marker_icon">arrow_downward</span>
@@ -49,10 +56,6 @@
             </div>
         </section>
         <section id="calendar" class="calendar">
-            <div class="calendar_heading">
-                <h2 class="calendar_title">Calendário</h2>
-                <p class="calendar_text">Revise seus registros anteriores</p>
-            </div>
             <div class="calendar_container">
                 <!-- <div class="calendar_header">
                     <button type="button" class="calendar_button prev_month">
@@ -76,21 +79,23 @@
                     <!-- Days will be dynamically generated here -->
                 </div>
         </section>
-        <div class="menu">
-            <button type="button" class="menu_item active" data-target="registers">
-                <span class="material-symbols-outlined menu_item_icon ">home</span>
-                Início
-            </button>
-            <button type="button" class="menu_item" data-target="calendar">
-                <span class="material-symbols-outlined menu_item_icon">calendar_today</span>
-                Calendário
-            </button>
-        </div>
         <div class="mark">
             <span class="material-symbols-outlined mark_icon">add</span>
             <!-- <p class="mark_text">Registrar ponto</p> -->
         </div>
     </main>
+
+    
+    <div class="menu">
+        <button type="button" class="menu_item active" data-target="registers">
+            <span class="material-symbols-outlined menu_item_icon ">home</span>
+            Início
+        </button>
+        <button type="button" class="menu_item" data-target="calendar">
+            <span class="material-symbols-outlined menu_item_icon">calendar_today</span>
+            Calendário
+        </button>
+    </div>
     
     <div class="modals">
         <div class="modal" id="clockIn">
