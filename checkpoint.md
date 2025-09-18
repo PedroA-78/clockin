@@ -49,3 +49,35 @@ Criar calendário para histórico dos dias.
 Melhorar responsividade no celular real.
 
 Separar CSS em módulos (header.css, menu.css, etc).
+
+
+
+Onde você parou
+
+Tela inicial funcionando (registros do dia aparecem e botão acompanha os steps).
+
+Persistência feita em localStorage.
+
+Se todos os pontos do dia são batidos → botão desabilitado e aparece "registrado".
+
+Estrutura JS mais modularizada.
+
+📌 Próximos passos
+
+Criar a nova section do calendário no HTML (<section id="calendar"></section>).
+
+Adaptar o menu inferior:
+
+Usar data-target="home" e data-target="calendar".
+
+Implementar o JS para mostrar/esconder sections (.active).
+
+Montar layout básico do calendário (grid com 7 colunas, células para cada dia).
+
+Por enquanto só os dias do mês, sem lógica de preenchimento.
+
+Integrar com o localStorage:
+
+Para cada YYYY-MM-DD, se houver registros, marcar visualmente no calendário (ex: classe .has-data).
+
+Ao clicar no dia, abrir modal ou detalhe mostrando os registros.

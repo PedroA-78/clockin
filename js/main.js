@@ -1,54 +1,62 @@
-import { openModal, closeModal } from "./modal.js"
+import { openModal } from "./modal.js"
+import { setupMenu } from "./section.js"
 import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep } from "./storage.js"
 
-// MODAL
-const mark = document.querySelector('.mark')
-mark.addEventListener('click', () => {
-    openTime()
-    openModal('clockIn')
-    closeModal('clockIn')
-})
-
-// INPUTS
-const hoursInput = document.querySelector('.time_hours')
-const minutesInput = document.querySelector('.time_minutes')
-let lastFocusedInput = hoursInput
-hoursInput.addEventListener('focus', () => lastFocusedInput = hoursInput)
-minutesInput.addEventListener('focus', () => lastFocusedInput = minutesInput)
-
-// CONTROLES
-const more = document.querySelector('.input_more')
-const minus = document.querySelector('.input_minus')
-
-more.addEventListener('click', () => {
-    if (lastFocusedInput === hoursInput) addHour()
-    if (lastFocusedInput === minutesInput) addMinute()
-})
-
-minus.addEventListener('click', () => {
-    if (lastFocusedInput === hoursInput) subHour()
-    if (lastFocusedInput === minutesInput) subMinute()
-})
-
-const normalize = () => {
-    if (lastFocusedInput === hoursInput) normalizeTime('hours')
-    if (lastFocusedInput === minutesInput) normalizeTime('minutes')
-}
-hoursInput.addEventListener('input', () => normalize())
-minutesInput.addEventListener('input', () => normalize())
-
-// INIT REGISTER MODAL
-const submit = document.querySelector('.form_submit')
-window.addEventListener('DOMContentLoaded', () => { 
+window.addEventListener('DOMContentLoaded', () => {
+    // INIT PAGE
     load()
     updateUI(checkStep())
+    // eraseDay() // use this to erase the day data (for testing purposes)
 
-    if (0) eraseDay() // use this to erase the day data (for testing purposes)
+
+    // REGISTERS MODAL (RM)
+
+    // RM - SELETORS
+    const mark = document.querySelector('.mark')
+    const more = document.querySelector('.input_more')
+    const minus = document.querySelector('.input_minus')
+    const hoursInput = document.querySelector('.time_hours')
+    const minutesInput = document.querySelector('.time_minutes')
+    let lastFocusedInput = hoursInput
+    const submit = document.querySelector('.form_submit')
+
+    
+    const normalize = () => {
+        if (lastFocusedInput === hoursInput) normalizeTime('hours')
+        if (lastFocusedInput === minutesInput) normalizeTime('minutes')
+    }
+
+    // RM - OPEN
+    mark?.addEventListener('click', () => {
+        openTime()
+        openModal('clockIn')
+    })
+
+    // RM - CONTROLS
+    more?.addEventListener('click', () => {
+        if (lastFocusedInput === hoursInput) addHour()
+        if (lastFocusedInput === minutesInput) addMinute()
+    })
+
+    minus?.addEventListener('click', () => {
+        if (lastFocusedInput === hoursInput) subHour()
+        if (lastFocusedInput === minutesInput) subMinute()
+    })
+
+    // RM - INPUTS
+    hoursInput?.addEventListener('focus', () => lastFocusedInput = hoursInput)
+    hoursInput?.addEventListener('input', () => normalize())
+
+    minutesInput?.addEventListener('focus', () => lastFocusedInput = minutesInput)
+    minutesInput?.addEventListener('input', () => normalize())
+
+    // RM - SUBMIT
+    submit?.addEventListener('click', () => {
+        nextStep()
+        save()
+    })
+
 })
 
-submit.addEventListener('click', () => {
-    nextStep()
-    save()
-})

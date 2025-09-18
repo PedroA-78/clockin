@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClockIn</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/default.css    ">
+    <link rel="stylesheet" href="css/registers.css">
+    <link rel="stylesheet" href="css/calendar.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 </head>
 <body class="app">
     <header class="header"></header>
     <main class="main">
-        <section class="registers">
+        <section id="registers" class="registers active">
             <div class="registers_heading">
                 <h2 class="registers_title">Registros de Hoje</h2>
                 <p class="registers_text">Acompanhe seus horários de entrada e saída</p>
@@ -46,12 +48,35 @@
                 </div>
             </div>
         </section>
+        <section id="calendar" class="calendar">
+            <div class="calendar_heading">
+                <h2 class="calendar_title">Calendário</h2>
+                <p class="calendar_text">Revise seus registros anteriores</p>
+            </div>
+            <div class="calendar_container">
+                <div class="calendar_header">
+                    <button type="button" class="calendar_button prev_month">
+                        <span class="material-symbols-outlined calendar_icon">chevron_left</span>
+                    </button>
+                    <h3 class="calendar_month">Setembro 2025</h3>
+                    <button type="button" class="calendar_button next_month">
+                        <span class="material-symbols-outlined calendar_icon">chevron_right</span>
+                    </button>
+                </div>
+                <div class="calendar_days">
+                    <div class="day_name">Dom</div>
+                    <div class="day_name">Seg</div>
+                    <div class="day_name">Ter</div>
+                    <div class="day_name">Qua</div>
+                    <div class="day_name">Qui</div>
+                </div>
+        </section>
         <div class="menu">
-            <button type="button" class="menu_item active">
+            <button type="button" class="menu_item active" data-target="registers">
                 <span class="material-symbols-outlined menu_item_icon ">home</span>
                 Início
             </button>
-            <button type="button" class="menu_item">
+            <button type="button" class="menu_item" data-target="calendar">
                 <span class="material-symbols-outlined menu_item_icon">calendar_today</span>
                 Calendário
             </button>

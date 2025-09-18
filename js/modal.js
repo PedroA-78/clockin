@@ -1,5 +1,6 @@
-function openModal(modalId) {
+export function openModal(modalId) {
     document.getElementById(modalId).classList.add('active')
+    closeModal(modalId)
 }
 
 function closeModal(modalId) {
@@ -10,5 +11,3 @@ function closeModal(modalId) {
 
     overylay?.addEventListener('click', close)
 }
-
-export { openModal, closeModal }
