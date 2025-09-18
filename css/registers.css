@@ -1,27 +1,5 @@
 /* REGISTERS */
 
-.registers {
-    padding: 1.5rem;
-}
-
-.registers_heading {
-    margin-bottom: 1.5rem;
-}
-
-.registers_title,
-.registers_text {
-    margin: 0 0 .5rem;
-    text-align: center;
-    font-size: 1.25rem;
-    color: var(--title-color);
-}
-
-.registers_text {
-    margin: 0;
-    font-size: .875rem;
-    color: var(--text-color);
-}
-
 /* MARKERS */
 
 .marker, .worked {

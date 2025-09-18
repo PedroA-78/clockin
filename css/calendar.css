@@ -1,0 +1,80 @@
+/* CALENDAR */
+
+.calendar {
+    padding: 1.5rem .5rem;
+}
+
+.calendar_weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.day_name {
+    margin: 0;
+    padding: .5rem 0;
+    text-align: center;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.calendar_days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: .25rem 0.125rem;
+}
+
+.day {
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    align-items: center;
+
+    min-height: 5rem;
+    padding: .5rem .25rem;
+    border: 2px solid rgba(var(--foreground), .2);
+    border-radius: .75rem;
+    background-color: rgba(var(--foreground), .01);
+}
+
+.previous_month, .next_month {
+    opacity: .6;
+}
+
+.day_number, .day_worked_hours {
+    margin: 0;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.day_number.finished {
+    color: rgba(var(--blue), 1);
+}
+
+.day_worked_hours {
+    display: none;
+    padding: .5rem .25rem;
+    border-radius: .625rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: rgba(var(--green), 1);
+    background-color: rgba(var(--green), .2);
+}
+
+.day_finished_icon {
+    display: none !important;
+    font-size: .875rem !important; 
+    color: rgba(var(--green), 1);
+    justify-self: right;
+    align-self: center;
+}
+
+.day_worked_hours.finished, .day_finished_icon.finished {
+    display: block !important;
+}

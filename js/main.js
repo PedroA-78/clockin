@@ -2,14 +2,21 @@ import { openModal } from "./modal.js"
 import { setupMenu } from "./section.js"
 import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
-import { load, save, eraseDay, checkStep } from "./storage.js"
+import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"
+import { generateCalendar, markDayAsFinished } from "./calendar.js"
 
 window.addEventListener('DOMContentLoaded', () => {
     // INIT PAGE
     load()
     updateUI(checkStep())
-    // eraseDay() // use this to erase the day data (for testing purposes)
+    setupMenu()
 
+    // CALENDAR
+    generateCalendar()
+    markDayAsFinished(getWorkedDays())
+
+
+    // eraseDay() // use this to erase the day data (for testing purposes)
 
     // REGISTERS MODAL (RM)
 

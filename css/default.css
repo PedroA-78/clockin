@@ -54,8 +54,27 @@ body {
 
 .registers, .calendar {
     display: none;
+    padding: 1.5rem;
 }
 
 .registers.active, .calendar.active {
     display: block;
+}
+
+.registers_heading, .calendar_heading {
+    margin-bottom: 1.5rem;
+}
+
+.registers_title, .registers_text,
+.calendar_title, .calendar_text {
+    margin: 0 0 .5rem;
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--title-color);
+}
+
+.registers_text, .calendar_text {
+    margin: 0;
+    font-size: .875rem;
+    color: var(--text-color);
 }

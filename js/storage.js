@@ -63,6 +63,18 @@ export function checkStep() {
     }
 }
 
+export function getWorkedDays() {
+    const data = JSON.parse(localStorage.getItem('clockin')) || {}
+    let workedDays = {}
+
+    Object.keys(data).forEach(day => {
+        if (data[day]['worked_hours']) workedDays[day] = data[day]['worked_hours']
+    })
+
+    return workedDays
+
+}
+
 function calculateWorkedHours(d) {
     const data = d
     const day = getDay()
