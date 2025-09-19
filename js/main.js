@@ -3,20 +3,30 @@ import { setupMenu } from "./menu.js"
 import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"
-import { generateCalendar, markDayAsFinished } from "./calendar.js"
+import { generateCalendar, markDayAsFinished, monthControl } from "./calendar.js"
 
 window.addEventListener('DOMContentLoaded', () => {
     // INIT PAGE
     load()
     updateUI(checkStep())
     setupMenu()
+    // eraseDay() // use this to erase the day data (for testing purposes)
 
-    // CALENDAR
     generateCalendar()
     markDayAsFinished(getWorkedDays())
 
+    // CALENDAR (CL)
 
-    // eraseDay() // use this to erase the day data (for testing purposes)
+    // CL = SELETORS
+    const monthControls = document.querySelectorAll('[data-action]')
+    monthControls.forEach(button => { 
+        button.addEventListener('click', () => {
+            monthControl(button.dataset.action)
+            markDayAsFinished(getWorkedDays())
+        })
+    })
+
+
 
     // REGISTERS MODAL (RM)
 

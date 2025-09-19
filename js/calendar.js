@@ -1,7 +1,11 @@
 const calendar = document.querySelector(".calendar_days");
 
+let activeDate = new Date()
+let activeMonth = activeDate.getMonth() + 1
+let activeYear = activeDate.getFullYear()
+
 export function generateCalendar() {
-    const date = new Date();
+    const date = new Date(activeYear, activeMonth, 0)
 
     const weekdays = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
     const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -22,12 +26,13 @@ export function generateCalendar() {
     }
 
     nextMonthDays(weekdayOfLastDay);
+
+    document.querySelector('.calendar_month').textContent = date.toLocaleDateString('pt-BR', {month: 'long', year: 'numeric'})
 }
 
 export function markDayAsFinished(workedDays) {
-    const date = new Date();
-    const currentMonth = date.getMonth() + 1;
-    const currentYear = date.getFullYear();
+    const currentMonth = activeMonth;
+    const currentYear = activeYear;
 
     const days = document.querySelectorAll(".current_month");
     days.forEach((dayElem) => {
@@ -49,6 +54,26 @@ export function markDayAsFinished(workedDays) {
             dayNumberElem?.classList.add("finished")
         }
     })
+}
+
+export function monthControl(action) {
+    if (action === "previous") {
+        activeMonth--
+        if (activeMonth < 0) {
+            activeMonth = 11
+            activeYear--
+        }
+    }
+
+    if (action === "next") {
+        activeMonth++
+        if (activeMonth > 11) {
+            activeMonth = 0
+            activeYear++
+        }
+    }
+
+    generateCalendar()
 }
 
 function dayElement() {
