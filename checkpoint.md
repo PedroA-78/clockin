@@ -1,83 +1,38 @@
-✅ Checkpoint – 16/09/2025
+✅ Checkpoint 18/09/25
 
-Checkpoint — Próximos passos no ClockIn
+Seleção do dia
 
-Preparar base do calendário
+Implementar um seletor de dia no calendário.
 
-Criar um componente/section calendar na tela (HTML + CSS).
+Quando clicar em um dia, marcar como ativo (ex: com uma classe .selected).
 
-Estruturar dias do mês em grid (7 colunas = dias da semana).
+Esse dia selecionado será a referência para salvar/carregar os registros.
 
-Destacar o dia atual com um estilo especial.
+Integração com localStorage
 
-Integração com registros
+Ao salvar registros, usar a chave baseada no dia selecionado (YYYY-MM-DD).
 
-Marcar visualmente os dias que já possuem registros no localStorage.
+Exemplo: clockin-2025-09-16.
 
-Exemplo: bolinha azul embaixo do número do dia.
+Carregar dados existentes
 
-Interação básica
+Quando o usuário selecionar um dia no calendário:
 
-Ao clicar em um dia, exibir os registros daquele dia (mesmo layout da tela inicial).
+Buscar no localStorage.
 
-Se o dia não tiver registros → mostrar mensagem tipo "Nenhum ponto registrado neste dia".
+Se existir → preencher marcadores da tela inicial e modal.
 
-Refino visual
+Se não existir → limpar/zerar os marcadores para novo registro.
 
-Transição suave na troca de dias.
+UX
 
-Ícones de navegação (← →) para trocar de mês (mesmo que só prepare a estrutura).
+Deixar claro qual dia está ativo (ex: borda, fundo colorido).
 
-Organização do JS
+Talvez mostrar o nome do dia (“terça-feira, 16 de setembro”) no topo da tela inicial para reforçar contexto.
 
-Criar módulo calendar.js separado.
-
-Funções principais:
-
-renderCalendar(currentMonth) → desenha os dias.
-
-highlightMarkedDays() → verifica localStorage e marca.
-
-openDayDetails(day) → abre registros.
 
 🚀 Ideias futuras (não urgente)
 
 Animações suaves (modal e FAB).
 
-Criar calendário para histórico dos dias.
-
 Melhorar responsividade no celular real.
-
-Separar CSS em módulos (header.css, menu.css, etc).
-
-
-
-Onde você parou
-
-Tela inicial funcionando (registros do dia aparecem e botão acompanha os steps).
-
-Persistência feita em localStorage.
-
-Se todos os pontos do dia são batidos → botão desabilitado e aparece "registrado".
-
-Estrutura JS mais modularizada.
-
-📌 Próximos passos
-
-Criar a nova section do calendário no HTML (<section id="calendar"></section>).
-
-Adaptar o menu inferior:
-
-Usar data-target="home" e data-target="calendar".
-
-Implementar o JS para mostrar/esconder sections (.active).
-
-Montar layout básico do calendário (grid com 7 colunas, células para cada dia).
-
-Por enquanto só os dias do mês, sem lógica de preenchimento.
-
-Integrar com o localStorage:
-
-Para cada YYYY-MM-DD, se houver registros, marcar visualmente no calendário (ex: classe .has-data).
-
-Ao clicar no dia, abrir modal ou detalhe mostrando os registros.

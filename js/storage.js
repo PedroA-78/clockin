@@ -54,13 +54,11 @@ export function checkStep() {
 
     if (!data[day]) return
 
-    const markers = document.querySelectorAll('.marker')
-    for (let i = 0; i < markers.length; i++) {
-        const step = steps[i]
-
-        if (!data[day][step]) return i
-        if (i == steps.length - 1) return (steps.length - 1)
+    for (let i = 0; i < steps.length; i++) {
+        if (!data[day][steps[i]]) return i
     }
+
+    return -1
 }
 
 export function getWorkedDays() {
@@ -78,8 +76,6 @@ export function getWorkedDays() {
 function calculateWorkedHours(d) {
     const data = d
     const day = getDay()
-
-    console.log(data)
 
     if (!data[day]) return
     if (!data[day]['clock_out']) return
