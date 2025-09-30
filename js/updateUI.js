@@ -1,23 +1,27 @@
 const steps = [
-    { 
+    {
+        id: 0,
         key: "clock_in",
         label: "Entrada",
         icon: "arrow_downward",
         subtext: "Iniciar expediente"
     },
     { 
+        id: 1,
         key: "interval_start",
         label: "Saída para o intervalo",
         icon: "restaurant", 
         subtext: "Pausa para almoço"
     },
     { 
+        id: 2,
         key: "interval_end",
         label: "Volta do Intervalo",
         icon: "restaurant", 
         subtext: "Retomar expediente"
     },
     { 
+        id: 3,
         key: "clock_out",
         label: "Saída",
         icon: "arrow_upward",
@@ -43,11 +47,12 @@ export function updateUI(lastStep) {
 }
 
 export function nextStep() {
-    updateMarkers({ hours: document.querySelector('.time_hours').value,
-                    minutes: document.querySelector('.time_minutes').value})
+    const modal = document.querySelector('.modal.active')
+    updateMarkers({ hours: modal.querySelector('.time_hours').value,
+                    minutes: modal.querySelector('.time_minutes').value})
 
     if (currentStep < steps.length - 1) {
-        document.querySelector('.form_submit').classList.toggle(step.key)
+        modal.querySelector('.form_submit').classList.toggle(step.key)
 
         currentStep++
         updateUI()
@@ -62,12 +67,14 @@ function updateMarkers({hours, minutes}) {
     const marker = markers[currentStep]
 
     marker.classList.add('marked')
+    marker.setAttribute('data-step', step.id)
     marker.querySelector('.marker_icon').classList.add(step.key)
     marker.querySelector('.marker_hour').textContent = `${hours}:${minutes}`
     marker.querySelector('.marker_register').classList.add('visible')
 }
 
 function setDate() {
+    const modal = document.querySelector('.modal.active')
     const today = new Date()
     const formatted = today.toLocaleDateString("pt-BR", {
         weekday: "long",
@@ -76,15 +83,16 @@ function setDate() {
         year: "numeric"
     })
 
-    document.querySelector('.modal_footering_text').textContent = formatted
+    modal.querySelector('.modal_footering_text').textContent = formatted
 }
 
 function updateSubmitButton({key, label, icon, subtext}) {
-    const button = document.querySelector('.form_submit')
-    const iconElem = document.querySelector('.form_submit_icon')
-    const text = document.querySelector('.form_submit_text')
-    const subtextElem = document.querySelector('.form_submit_subtext')
-    const nextRegister = document.querySelector('.modal_heading_subtext')
+    const modal = document.querySelector('.modal.active')
+    const button = modal?.querySelector('.form_submit')
+    const iconElem = modal?.querySelector('.form_submit_icon')
+    const text = modal?.querySelector('.form_submit_text')
+    const subtextElem = modal?.querySelector('.form_submit_subtext')
+    const nextRegister = modal?.querySelector('.modal_heading_subtext')
 
     button.className = `form_submit ${key}`
     iconElem.textContent = icon

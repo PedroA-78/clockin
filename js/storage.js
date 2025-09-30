@@ -36,6 +36,7 @@ export function load() {
         if (!data[day][step]) return
 
         marker.classList.add('marked')
+        marker.setAttribute('data-step', idx)
         marker.querySelector('.marker_icon').classList.add(step)
         marker.querySelector('.marker_hour').textContent = data[day][step]
         marker.querySelector('.marker_register').classList.add('visible')

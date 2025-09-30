@@ -4,9 +4,9 @@ function format(valeu) {
     return `0${valeu}`.slice(-2)
 }
 
-function getTime() {
-    hours = new Date().getHours()
-    minutes = new Date().getMinutes()
+function getTime(h, m) {
+    hours = h || new Date().getHours()
+    minutes = m || new Date().getMinutes()
 }
 
 export function openTime() {
@@ -14,9 +14,16 @@ export function openTime() {
     renderTime()
 }
 
+export function openMarkerTime(marker) {
+    const time = marker.querySelector('.marker_hour').textContent.split(':')
+    getTime(Number(time[0]), Number(time[1]))
+    renderTime()
+}
+
 function renderTime() {
-    document.querySelector('.time_hours').value = format(hours)
-    document.querySelector('.time_minutes').value = format(minutes)
+    const modal = document.querySelector('.modal.active')
+    modal.querySelector('.time_hours').value = format(hours)
+    modal.querySelector('.time_minutes').value = format(minutes)
 }
 
 export function addHour() {
@@ -29,7 +36,6 @@ export function subHour() {
     renderTime()
 }
 
-
 export function addMinute() {
     minutes = (minutes + 1) % 60
     renderTime()
@@ -41,13 +47,15 @@ export function subMinute() {
 }
 
 export function normalizeTime(option) {
-    const inputHours = document.querySelector('.time_hours')
-    const inputMinutes = document.querySelector('.time_minutes')
+    const modal = document.querySelector('.modal.active')
+    const inputHours = modal.querySelector('.time_hours')
+    const inputMinutes = modal.querySelector('.time_minutes')
 
     if (option === 'hours') {
         let value = parseInt(inputHours.value)
         if (value > 23) value = 0
         if (value < 0) value = 23
+        if (isNaN(value)) value = 0
 
         hours = Number(value)
     }
@@ -56,6 +64,7 @@ export function normalizeTime(option) {
         let value = parseInt(inputMinutes.value)
         if (value > 59) value = 0
         if (value < 0) value = 59 
+        if (isNaN(value)) value = 0
 
         minutes = Number(value)
     }

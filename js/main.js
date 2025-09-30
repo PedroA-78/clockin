@@ -1,14 +1,65 @@
 import { openModal } from "./modal.js"
 import { setupMenu } from "./menu.js"
-import { openTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
+import { openTime, openMarkerTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"
 import { generateCalendar, markDayAsFinished, monthControl } from "./calendar.js"
 
 window.addEventListener('DOMContentLoaded', () => {
+    // AUX. FUNCTIONS (AX)
+
+    let hoursInput, minutesInput, lastFocusedInput, selectedStep
+
+    // AX - GLOBAL CONTROLS INPUT
+    document.body.addEventListener('click', (e) => {
+        const modal = document.querySelector('.modal.active')
+        if (!modal) return
+
+        // + BUTTON
+        if (e.target.closest('.input_more')) { 
+            if (lastFocusedInput === hoursInput) addHour()
+            if (lastFocusedInput === minutesInput) addMinute()
+        }
+
+        // - BUTTON
+        if (e.target.closest('.input_minus')) {
+            if (lastFocusedInput === hoursInput) subHour()
+            if (lastFocusedInput === minutesInput) subMinute()
+        }
+
+        // SUBMIT BUTTON
+        if (e.target.closest('.form_submit')) {
+            nextStep()
+            save()
+        }
+    })
+
+    const setModalControls = () => {
+        const modal = document.querySelector('.modal.active')
+        if (!modal) return
+
+        hoursInput = modal.querySelector('.time_hours')
+        minutesInput = modal.querySelector('.time_minutes')
+        lastFocusedInput = hoursInput
+
+
+        // AX = INPUT
+        hoursInput?.addEventListener('focus', () => lastFocusedInput = hoursInput)
+        hoursInput?.addEventListener('input', () => normalize())
+
+        minutesInput?.addEventListener('focus', () => lastFocusedInput = minutesInput)
+        minutesInput?.addEventListener('input', () => normalize())
+    }
+
+    const normalize = () => {
+        if (lastFocusedInput === hoursInput) normalizeTime('hours')
+        if (lastFocusedInput === minutesInput) normalizeTime('minutes')
+    }
+
+
+
     // INIT PAGE
     load()
-    updateUI(checkStep())
     setupMenu()
     // eraseDay() // use this to erase the day data (for testing purposes)
 
@@ -19,6 +70,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // CL = SELETORS
     const monthControls = document.querySelectorAll('[data-action]')
+
+    // CL - OPEN
     monthControls.forEach(button => { 
         button.addEventListener('click', () => {
             monthControl(button.dataset.action)
@@ -32,47 +85,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // RM - SELETORS
     const mark = document.querySelector('.mark')
-    const more = document.querySelector('.input_more')
-    const minus = document.querySelector('.input_minus')
-    const hoursInput = document.querySelector('.time_hours')
-    const minutesInput = document.querySelector('.time_minutes')
-    let lastFocusedInput = hoursInput
-    const submit = document.querySelector('.form_submit')
-
-    
-    const normalize = () => {
-        if (lastFocusedInput === hoursInput) normalizeTime('hours')
-        if (lastFocusedInput === minutesInput) normalizeTime('minutes')
-    }
 
     // RM - OPEN
     mark?.addEventListener('click', () => {
-        openTime()
         openModal('clockIn')
+        openTime()
+        updateUI(checkStep())
+        setModalControls()
     })
 
-    // RM - CONTROLS
-    more?.addEventListener('click', () => {
-        if (lastFocusedInput === hoursInput) addHour()
-        if (lastFocusedInput === minutesInput) addMinute()
-    })
 
-    minus?.addEventListener('click', () => {
-        if (lastFocusedInput === hoursInput) subHour()
-        if (lastFocusedInput === minutesInput) subMinute()
-    })
+    // EDIT REGISTER MODAL (EM)
 
-    // RM - INPUTS
-    hoursInput?.addEventListener('focus', () => lastFocusedInput = hoursInput)
-    hoursInput?.addEventListener('input', () => normalize())
+    // EM - OPEN
+    document.body.addEventListener('click', (e) => {
+        const marked = e.target.closest('.marked')
+        if (!marked) return
 
-    minutesInput?.addEventListener('focus', () => lastFocusedInput = minutesInput)
-    minutesInput?.addEventListener('input', () => normalize())
-
-    // RM - SUBMIT
-    submit?.addEventListener('click', () => {
-        nextStep()
-        save()
+        selectedStep = marked.dataset.step
+        openModal('editRegister')
+        openMarkerTime(marked)
+        updateUI(selectedStep)
+        setModalControls()
     })
 
 })
