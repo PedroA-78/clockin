@@ -5,8 +5,9 @@ function format(valeu) {
 }
 
 function getTime(h, m) {
-    hours = h || new Date().getHours()
-    minutes = m || new Date().getMinutes()
+    // bug ao receber o número 0, ele considera como vazio e pega uma nova data
+    hours = (h !== undefined && h !== null) ? h : new Date().getHours()
+    minutes = (m !== undefined && m !== null) ? m : new Date().getMinutes()
 }
 
 export function openTime() {
