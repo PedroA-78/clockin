@@ -33,7 +33,11 @@ let currentStep = 0 // começa no primeiro
 let step = steps[currentStep]
 
 export function updateUI(lastStep) {
-    if (lastStep === -1) { disableSubmit(); return }
+    if (lastStep === -1) { 
+        disableSubmit() 
+        setDate() 
+        return 
+    }
 
     currentStep = lastStep || currentStep
     step = steps[currentStep]

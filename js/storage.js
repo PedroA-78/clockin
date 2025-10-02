@@ -1,9 +1,9 @@
 const steps = ['clock_in', 'interval_start', 'interval_end', 'clock_out']
 
-export function save() {
+export function save(date) {
     const markers = document.querySelectorAll('.marked')
     const data = JSON.parse(localStorage.getItem('clockin')) || {}
-    const day = getDay()
+    const day = date
 
     if (!data[day]) data[day] = {}
 
@@ -14,7 +14,7 @@ export function save() {
     })
 
     if (data[day]['clock_out']) {
-        const workedHours = calculateWorkedHours(data)
+        const workedHours = calculateWorkedHours(data, date)
         data[day]['worked_hours'] = workedHours
         
         const worked = document.querySelector('.worked')
@@ -24,16 +24,24 @@ export function save() {
     localStorage.setItem('clockin', JSON.stringify(data))
 }
 
-export function load() {
+export function load(date) {
     const data = JSON.parse(localStorage.getItem('clockin')) || {}
-    const day = getDay()
-
-    if (!data[day]) return
-
+    const day = date
     const markers = document.querySelectorAll('.marker')
+    
+    if (!data[day]) {
+        markers.forEach(marker => { eraseMarker(marker) })
+        document.querySelector('.worked .marker_hour').textContent = '--:--'
+        return
+    }
+
     markers.forEach((marker, idx) => {
         const step = steps[idx]
-        if (!data[day][step]) return
+        if (!data[day][step]) {
+            eraseMarker(marker)
+            document.querySelector('.worked .marker_hour').textContent = '--:--'
+            return
+        }
 
         marker.classList.add('marked')
         marker.setAttribute('data-step', idx)
@@ -49,9 +57,9 @@ export function load() {
     }
 }
 
-export function checkStep() {
+export function checkStep(date) {
     const data = JSON.parse(localStorage.getItem('clockin')) || {}
-    const day = getDay()
+    const day = date
 
     if (!data[day]) return
 
@@ -74,9 +82,8 @@ export function getWorkedDays() {
 
 }
 
-function calculateWorkedHours(d) {
-    const data = d
-    const day = getDay()
+function calculateWorkedHours(data, date) {
+    const day = date
 
     if (!data[day]) return
     if (!data[day]['clock_out']) return
@@ -99,18 +106,21 @@ function calculateWorkedHours(d) {
     return `${format(hours)}:${format(minutes)}`
 }
 
-function getDay() {
-    const date = new Date()
-    return `${date.getFullYear()}-${format(date.getMonth()+1)}-${format(date.getDate())}`
-}
-
 function format(value) {
     return `0${value}`.slice(-2)
 }
 
-export function eraseDay() {
+function eraseMarker(marker) {
+    marker.classList.remove('marked')
+    marker.removeAttribute('data-step')
+    marker.querySelector('.marker_icon').className = 'material-symbols-outlined marker_icon'
+    marker.querySelector('.marker_hour').textContent = '--:--'
+    marker.querySelector('.marker_register').classList.remove('visible')
+}
+
+export function eraseDay(date) {
     const data = JSON.parse(localStorage.getItem('clockin')) || {}
-    const day = getDay()
+    const day = date
 
     if (data[day]) {
         delete data[day]

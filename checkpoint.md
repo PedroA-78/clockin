@@ -1,18 +1,48 @@
-✅ Checkpoint 18/09/25
+Onde você parou
 
-Seleção do dia
+Já implementou edição de registros (selectedStep para controlar).
 
-Implementar um seletor de dia no calendário.
+Todos os fluxos de registro, edição, persistência e UI estão funcionando para o dia atual.
 
-Quando clicar em um dia, marcar como ativo (ex: com uma classe .selected).
+O calendário já renderiza e marca os dias trabalhados.
 
-Esse dia selecionado será a referência para salvar/carregar os registros.
+🎯 Próximos passos (amanhã)
 
-Integração com localStorage
+Criar selectedDay
 
-Ao salvar registros, usar a chave baseada no dia selecionado (YYYY-MM-DD).
+Variável global (começa no YYYY-MM-DD de hoje).
 
-Exemplo: clockin-2025-09-16.
+Substituir onde hoje você usa “data atual” para usar selectedDay.
+
+Integrar com o calendário
+
+Ao clicar em um dia → atualizar selectedDay.
+
+Chamar funções que:
+
+Carreguem os registros desse dia do localStorage.
+
+Atualizem a área inicial com os marcadores corretos.
+
+Salvar registros no dia selecionado
+
+Quando registrar/editar → gravar no localStorage[selectedDay].
+
+Se mudar de dia e voltar, os dados devem estar lá.
+
+UI feedback
+
+Mostrar visualmente qual é o dia selecionado no calendário.
+
+Atualizar header inicial (pode exibir “Registrando em: 13/09/2025”).
+
+📌 Sugestão: começar criando a função setSelectedDay(day) que:
+
+Atualiza a variável global.
+
+Chama load(day).
+
+Atualiza a UI.
 
 Carregar dados existentes
 

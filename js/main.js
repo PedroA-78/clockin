@@ -3,7 +3,7 @@ import { setupMenu } from "./menu.js"
 import { openTime, openMarkerTime, addHour, subHour, addMinute, subMinute, normalizeTime } from "./timerPicker.js"
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"
-import { generateCalendar, markDayAsFinished, monthControl } from "./calendar.js"
+import { generateCalendar, markDayAsFinished, monthControl, setActiveDay, getActiveDate } from "./calendar.js"
 
 window.addEventListener('DOMContentLoaded', () => {
     // AUX. FUNCTIONS (AX)
@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // SUBMIT BUTTON
         if (e.target.closest('.form_submit')) {
             nextStep()
-            save()
+            save(getActiveDate())
         }
     })
 
@@ -59,10 +59,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     // INIT PAGE
-    load()
+    load(getActiveDate())
     setupMenu()
     // eraseDay() // use this to erase the day data (for testing purposes)
-
+    
     generateCalendar()
     markDayAsFinished(getWorkedDays())
 
@@ -79,6 +79,19 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     })
 
+    document.body.addEventListener('click', (e) => {
+        const calendar = e.target.closest('.calendar_days')
+        const days = calendar?.querySelectorAll('.current_month')
+        const day = e.target.closest('.current_month')
+
+        days?.forEach(elemDay => { elemDay.classList.toggle('active', elemDay === day ) });
+
+        if (day) {
+            setActiveDay(day.querySelector('.day_number').textContent)
+            load(getActiveDate())
+        }
+    })
+
 
 
     // REGISTERS MODAL (RM)
@@ -90,10 +103,9 @@ window.addEventListener('DOMContentLoaded', () => {
     mark?.addEventListener('click', () => {
         openModal('clockIn')
         openTime()
-        updateUI(checkStep())
+        updateUI(checkStep(getActiveDate()))
         setModalControls()
     })
-
 
     // EDIT REGISTER MODAL (EM)
 

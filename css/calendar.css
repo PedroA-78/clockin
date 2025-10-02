@@ -76,6 +76,8 @@
 }
 
 .day {
+    position: relative;
+
     display: grid;
     grid-template-rows: min-content 1fr min-content;
     align-items: center;
@@ -85,6 +87,25 @@
     border: 2px solid rgba(var(--foreground), .2);
     border-radius: .75rem;
     background-color: rgba(var(--foreground), .01);
+}
+
+/* .day.crrDay {
+    border: 2px solid rgba(var(--blue), 1);
+} */
+
+.day.active {
+    border: 2px solid rgba(var(--blue), 1);
+}
+
+.day.crrDay::after {
+    content: '';
+    position: absolute;
+    top: .375rem;
+    right: .375rem;
+    width: .3125rem;
+    height: .3125rem;
+    border-radius: 50%;
+    background-color: rgba(var(--blue), 1);
 }
 
 .previous_month, .next_month {
@@ -101,6 +122,18 @@
 
 .day_number.finished {
     color: rgba(var(--blue), 1);
+}
+
+.day.active .day_number {
+    color: rgba(var(--blue), 1);
+}
+
+.day.crrDay .day_number {
+    color: rgba(var(--blue), 1);
+}
+
+.day.crrDay.active .day_number {
+    /* color: #fff; */
 }
 
 .day_worked_hours {

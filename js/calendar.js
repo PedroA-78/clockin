@@ -3,6 +3,7 @@ const calendar = document.querySelector(".calendar_days");
 let activeDate = new Date()
 let activeMonth = activeDate.getMonth() + 1
 let activeYear = activeDate.getFullYear()
+let activeDay = activeDate.getDate()
 
 export function generateCalendar() {
     const date = new Date(activeYear, activeMonth, 0)
@@ -17,11 +18,12 @@ export function generateCalendar() {
     // Add empty days for the previous month
     previousMonthDays(weekdayOfFirstDay, date);
 
-    for (let i = 0; i < daysInMonth; i++) {
+    for (let i = 1; i <= daysInMonth; i++) {
         const day = dayElement();
         day.classList.add("current_month");
-        day.querySelector(".day_number").textContent = i + 1;
-
+        if (`${activeDate.getFullYear()}-${activeDate.getMonth() + 1}-${activeDate.getDate()}` === `${activeYear}-${activeMonth}-${i}`) day.classList.add('crrDay', 'active')
+        day.querySelector(".day_number").textContent = i;
+        
         calendar.appendChild(day);
     }
 
@@ -59,21 +61,29 @@ export function markDayAsFinished(workedDays) {
 export function monthControl(action) {
     if (action === "previous") {
         activeMonth--
-        if (activeMonth < 0) {
-            activeMonth = 11
+        if (activeMonth < 1) {
+            activeMonth = 12
             activeYear--
         }
     }
 
     if (action === "next") {
         activeMonth++
-        if (activeMonth > 11) {
-            activeMonth = 0
+        if (activeMonth > 12) {
+            activeMonth = 1
             activeYear++
         }
     }
 
     generateCalendar()
+}
+
+export function setActiveDay(day) {
+    activeDay = Number(day)
+}
+
+export function getActiveDate() {
+    return `${activeYear}-${formatDate(activeMonth)}-${formatDate(activeDay)}`
 }
 
 function dayElement() {
