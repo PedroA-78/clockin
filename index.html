@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClockIn</title>
-    <link rel="stylesheet" href="css/default.css    ">
+    <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/registers.css">
     <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/config.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 </head>
 <body class="app">
     <header class="header">
         <div class="registers_heading active">
             <span class="material-symbols-outlined registers_icon">punch_clock</span>
+            <!-- Alterar o texto de 'registers_title' conforme os dias selecionados pelo usuário. ex: Registros de 01/07/2025 -->
             <h2 class="registers_title">Registros de Hoje</h2>
             <p class="registers_text">Acompanhe seus horários de entrada e saída</p>
         </div>
@@ -20,6 +23,11 @@
             <span class="material-symbols-outlined calendar_icon">calendar_today</span>
             <h2 class="calendar_title">Calendário</h2>
             <p class="calendar_text">Revise seus registros anteriores</p>
+        </div>
+        <div class="config_heading">
+            <span class="material-symbols-outlined config_icon">settings</span>
+            <h2 class="config_title">Configurações</h2>
+            <p class="config_text">Ajuste suas preferências e gerencie seus dados</p>
         </div>
     </header>
     <main class="main">
@@ -79,7 +87,49 @@
                     <!-- Days will be dynamically generated here -->
                 </div>
         </section>
-        <div class="mark">
+        <section id="config" class="config">
+            <div class="journey">
+                <div class="journey_heading">
+                    <h2 class="journey_heading_title">Jornada de Trabalho</h2>
+                    <p class="journey_heading_text">Defina a quantidade de horas da sua jornada diária</p>
+                </div>
+                <div class="journey_content">
+                    <label  class="journey_content_title">Horas por dia</label>
+                    <input type="number" class="journey_content_input" placeholder="8">
+                    <p class="journey_content_text">As horas além da jornada serão consideradas como banco de horas ou hora extra.</p>
+                </div>
+            </div>
+            <div class="excess">
+                <div class="excess_heading">
+                    <h2 class="excess_heading_title">Tipo de Excedente</h2>
+                    <p class="excess_heading_text">Escolha como as horas excedente serão consideradas</p>
+                </div>
+                <div class="excess_content">
+                    <label class="excess_content_title">Banco de horas</label>
+                    <p class="excess_content_text">Horas excedentes acumuladas para compensação</p>
+                    <div class="excess_toggle_container">
+                        <span class="excess_toggle"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="manage">
+                <div class="manage_heading">
+                    <h2 class="manage_heading_title">Gerenciar Dados</h2>
+                    <p class="manage_heading_text">Importe ou exporte seus registros de ponto</p>
+                </div>
+                <div class="manage_content">
+                    <button type="button" class="manage_action">
+                        <span class="material-symbols-outlined manage_action_icon">download</span>
+                        Exportar Registros
+                    </button>
+                    <button type="button" class="manage_action">
+                        <span class="material-symbols-outlined manage_action_icon">upload</span>
+                        Importar Registros
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div class="mark active">
             <span class="material-symbols-outlined mark_icon">add</span>
             <!-- <p class="mark_text">Registrar ponto</p> -->
         </div>
@@ -93,6 +143,10 @@
         <button type="button" class="menu_item" data-target="calendar">
             <span class="material-symbols-outlined menu_item_icon">calendar_today</span>
             Calendário
+        </button>
+        <button type="button" class="menu_item" data-target="config">
+            <span class="material-symbols-outlined menu_item_icon">settings</span>
+            Config
         </button>
     </div>
     

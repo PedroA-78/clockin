@@ -52,16 +52,19 @@ body {
 
 /* SECTIONS */
 
-.registers, .calendar {
+.registers, .calendar,
+.config {
     display: none;
     padding: 1.5rem;
 }
 
-.registers.active, .calendar.active {
+.registers.active, .calendar.active,
+.config.active {
     display: block;
 }
 
-.registers_heading, .calendar_heading {
+.registers_heading, .calendar_heading,
+.config_heading {
     display: none;
     grid-template-columns: min-content 1fr;
     align-items: center;
@@ -76,11 +79,13 @@ body {
 }
 
 .registers_heading.active, 
-.calendar_heading.active {
+.calendar_heading.active,
+.config_heading.active {
     display: grid;
 }
 
-.registers_icon, .calendar_icon {
+.registers_icon, .calendar_icon,
+.config_icon {
     grid-row: 1 / 3;
     font-size: 1.75rem !important;
     color: rgb(var(--blue));
@@ -90,7 +95,8 @@ body {
     margin-bottom: .25rem;
 }
 
-.registers_title, .calendar_title {
+.registers_title, .calendar_title,
+.config_title {
     margin: 0 .75rem;
     font-family: var(--font-title);
     font-size: 1.125rem;
@@ -99,7 +105,8 @@ body {
     text-align: left;
 }
 
-.registers_text, .calendar_text {
+.registers_text, .calendar_text,
+.config_text {
     margin: 0 .75rem;
     font-size: .875rem;
     color: var(--text-color);
