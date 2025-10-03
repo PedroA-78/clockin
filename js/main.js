@@ -4,6 +4,7 @@ import { openTime, openMarkerTime, addHour, subHour, addMinute, subMinute, norma
 import { updateUI, nextStep } from "./updateUI.js"
 import { load, save, eraseDay, checkStep, getWorkedDays } from "./storage.js"
 import { generateCalendar, markDayAsFinished, monthControl, setActiveDay, getActiveDate } from "./calendar.js"
+import { setupBackups } from "./backup.js"
 
 window.addEventListener('DOMContentLoaded', () => {
     // AUX. FUNCTIONS (AX)
@@ -61,6 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // INIT PAGE
     load(getActiveDate())
     setupMenu()
+    setupBackups()
     // eraseDay() // use this to erase the day data (for testing purposes)
     
     generateCalendar()

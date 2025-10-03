@@ -118,14 +118,15 @@
                     <p class="manage_heading_text">Importe ou exporte seus registros de ponto</p>
                 </div>
                 <div class="manage_content">
-                    <button type="button" class="manage_action">
+                    <button type="button" class="manage_action" data-manage="export">
                         <span class="material-symbols-outlined manage_action_icon">download</span>
                         Exportar Registros
                     </button>
-                    <button type="button" class="manage_action">
+                    <button type="button" class="manage_action" data-manage="import" onclick="manage_action_import.click()">
                         <span class="material-symbols-outlined manage_action_icon">upload</span>
                         Importar Registros
                     </button>
+                    <input type="file" id="manage_action_import">
                 </div>
             </div>
         </section>

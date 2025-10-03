@@ -136,3 +136,7 @@
 .manage_action_icon {
     font-size: 1.375rem !important;
 }
+
+#manage_action_import {
+    display: none;
+}
